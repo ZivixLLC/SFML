@@ -393,6 +393,8 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     WindowHandle getSystemHandle() const;
+    
+    void setProcessEvents(bool process);
 
     ////////////////////////////////////////////////////////////
     /// \brief Create a Vulkan rendering surface

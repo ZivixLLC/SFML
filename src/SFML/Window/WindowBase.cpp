@@ -380,4 +380,8 @@ void WindowBase::setFullscreenWindow(const WindowBase* window)
     WindowsBaseImpl::fullscreenWindow = window;
 }
 
+    void WindowBase::setProcessEvents(bool process) {
+        m_impl->setProcessEvents(process);
+    }
+
 } // namespace sf

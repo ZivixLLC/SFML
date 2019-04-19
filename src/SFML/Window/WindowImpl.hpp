@@ -82,6 +82,9 @@ public:
     static WindowImpl* create(WindowHandle handle);
 
 public:
+    
+    void setProcessEvents(bool process) { m_bProcessEvents = process; }
+    bool isProcessingEvents() { return m_bProcessEvents; }
 
     ////////////////////////////////////////////////////////////
     /// \brief Destructor
@@ -266,6 +269,8 @@ protected:
     virtual void processEvents() = 0;
 
 private:
+    
+    bool m_bProcessEvents;
 
     ////////////////////////////////////////////////////////////
     /// \brief Read the joysticks state and generate the appropriate events

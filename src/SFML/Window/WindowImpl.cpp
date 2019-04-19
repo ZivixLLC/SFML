@@ -105,7 +105,8 @@ WindowImpl* WindowImpl::create(WindowHandle handle)
 
 ////////////////////////////////////////////////////////////
 WindowImpl::WindowImpl() :
-m_joystickThreshold(0.1f)
+m_joystickThreshold(0.1f),
+m_bProcessEvents(true) // mod by jon keller, 2019
 {
     // Get the initial joystick states
     JoystickManager::getInstance().update();
@@ -144,7 +145,8 @@ bool WindowImpl::popEvent(Event& event, bool block)
         // Get events from the system
         processJoystickEvents();
         processSensorEvents();
-        processEvents();
+        if (m_bProcessEvents)
+            processEvents();
 
         // In blocking mode, we must process events until one is triggered
         if (block)
