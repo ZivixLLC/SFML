@@ -226,7 +226,8 @@ void SFContext::createContext(SFContext* shared,
         attrs.push_back(static_cast<NSOpenGLPixelFormatAttribute>(m_settings.antialiasingLevel));
 
         // No software renderer - only hardware renderer
-        attrs.push_back(NSOpenGLPFAAccelerated);
+        if (@available(macOS 10.14, *)) // this only seems to work on macOS 10.14+ (jon keller fix)
+            attrs.push_back(NSOpenGLPFAAccelerated);
     }
 
     // Support for OpenGL 3.2 on Mac OS X Lion and later:
