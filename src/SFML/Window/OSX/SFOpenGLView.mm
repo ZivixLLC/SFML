@@ -121,7 +121,7 @@
         [self addTrackingArea:m_trackingArea];
 
         m_fullscreen = isFullscreen;
-        m_scaleFactor = 1.0; // Default value; it will be updated in finishInit
+        m_scaleFactor = [[NSScreen mainScreen] backingScaleFactor]; // Default value; it will be updated in finishInit
         m_cursorGrabbed = NO;
         m_deltaXBuffer = 0;
         m_deltaYBuffer = 0;
