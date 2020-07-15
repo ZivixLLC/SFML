@@ -68,9 +68,7 @@ macro(sfml_add_library target)
     string(TOUPPER "${NAME_UPPER}" NAME_UPPER)
     set_target_properties(${target} PROPERTIES DEFINE_SYMBOL ${NAME_UPPER}_EXPORTS)
 	
-	message("${target} static?")
 	if(MSVC AND THIS_STATIC)
-		message("${target} is static")
 		set_property(TARGET ${target} PROPERTY
 			MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 	endif()
