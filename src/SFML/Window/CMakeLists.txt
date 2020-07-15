@@ -281,7 +281,7 @@ elseif(SFML_OS_ANDROID)
 endif()
 
 # define the sfml-window target
-sfml_add_library(sfml-window
+sfml_add_library(sfml-window STATIC
                  SOURCES ${SRC} ${PLATFORM_SRC})
 # DRM libraries
 if(SFML_OS_LINUX OR SFML_OS_FREEBSD OR SFML_OS_OPENBSD OR SFML_OS_NETBSD)

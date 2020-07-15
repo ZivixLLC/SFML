@@ -86,7 +86,7 @@ source_group("render texture" FILES ${RENDER_TEXTURE_SRC})
 
 
 # define the sfml-graphics target
-sfml_add_library(sfml-graphics
+sfml_add_library(sfml-graphics STATIC
                  SOURCES ${SRC} ${DRAWABLES_SRC} ${RENDER_TEXTURE_SRC} ${STB_SRC})
 
 # setup dependencies

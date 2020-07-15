@@ -67,6 +67,13 @@ macro(sfml_add_library target)
     string(REPLACE "-" "_" NAME_UPPER "${target}")
     string(TOUPPER "${NAME_UPPER}" NAME_UPPER)
     set_target_properties(${target} PROPERTIES DEFINE_SYMBOL ${NAME_UPPER}_EXPORTS)
+	
+	message("${target} static?")
+	if(MSVC AND THIS_STATIC)
+		message("${target} is static")
+		set_property(TARGET ${target} PROPERTY
+			MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+	endif()
 
     # adjust the output file prefix/suffix to match our conventions
     if(BUILD_SHARED_LIBS AND NOT THIS_STATIC)

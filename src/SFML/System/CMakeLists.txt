@@ -86,7 +86,7 @@ else()
 endif()
 
 # define the sfml-system target
-sfml_add_library(sfml-system
+sfml_add_library(sfml-system STATIC
                  SOURCES ${SRC} ${PLATFORM_SRC})
 
 if(SFML_OS_ANDROID)
