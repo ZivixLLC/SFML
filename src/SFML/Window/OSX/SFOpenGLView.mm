@@ -152,9 +152,11 @@
 {
     // In order to prevent an infinite recursion when the window/view is
     // resized to zero-height/width, we ignore update event when resizing.
-    if (![self inLiveResize]) {
+    // jon keller, Zivix -- disabled the inLiveResize check because it was causing
+    // weird scaling issues
+    //if (![self inLiveResize]) {
         [super update];
-    }
+    //}
 }
 
 
