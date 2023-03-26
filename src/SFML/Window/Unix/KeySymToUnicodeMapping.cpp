@@ -32,7 +32,7 @@ namespace sf
 namespace priv
 {
 
-Uint32 keysymToUnicode(KeySym keysym)
+char32_t keysymToUnicode(KeySym keysym)
 {
     switch (keysym)
     {

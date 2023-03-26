@@ -51,7 +51,7 @@ namespace priv
 /// \return corresponding UTF-32
 ///
 ////////////////////////////////////////////////////////////
-Uint32 keysymToUnicode(KeySym keysym);
+char32_t keysymToUnicode(KeySym keysym);
 
 } // namespace priv
 
