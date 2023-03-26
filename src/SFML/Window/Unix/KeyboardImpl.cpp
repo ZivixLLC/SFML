@@ -664,8 +664,8 @@ String KeyboardImpl::getDescription(Keyboard::Scancode code)
 
     if (checkInput)
     {
-        KeySym keysym = scancodeToKeySym(code);
-        Uint32 unicode = keysymToUnicode(keysym);
+        KeySym   keysym  = scancodeToKeySym(code);
+        char32_t unicode = keysymToUnicode(keysym);
 
         if (unicode != 0)
             return String(unicode);
