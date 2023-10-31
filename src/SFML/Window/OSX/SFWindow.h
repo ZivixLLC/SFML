@@ -106,7 +106,7 @@
 /// Add some extra messages for SFML internal usage.
 ///
 ////////////////////////////////////////////////////////////
-@interface NSWindow (SFML)
+/*@interface NSWindow (SFML)
 
 ////////////////////////////////////////////////////////////
 /// Proxy for performClose: for the app delegate
@@ -117,3 +117,4 @@
 -(id)sfClose;
 
 @end
+*/

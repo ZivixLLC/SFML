@@ -344,6 +344,12 @@
     m_mouseIsIn = NO;
 }
 
+////////////////////////////////////////////////////////
+-(void)unregisterForNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 #pragma mark
 #pragma mark Subclassing methods
@@ -352,8 +358,8 @@
 ////////////////////////////////////////////////////////
 -(void)dealloc
 {
-    // Unregister for window focus events
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    // Unregister for window notifications
+    [self unregisterForNotifications];
 
     // Unregister
     [self removeTrackingArea:m_trackingArea];

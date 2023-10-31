@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////
 #import <SFML/Window/OSX/NSImage+raw.h>
 
-@implementation NSImage (raw)
+/*@implementation NSImage (raw)
 
 +(NSImage*)imageWithRawData:(const sf::Uint8*)pixels andSize:(NSSize)size
 {
@@ -66,3 +66,4 @@
 }
 
 @end
+*/

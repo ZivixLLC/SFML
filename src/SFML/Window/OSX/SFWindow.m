@@ -107,7 +107,7 @@
 @end
 
 
-@implementation NSWindow (SFML)
+/*@implementation NSWindow (SFML)
 
 ////////////////////////////////////////////////////////////
 -(id)sfClose
@@ -117,3 +117,4 @@
 }
 
 @end
+*/

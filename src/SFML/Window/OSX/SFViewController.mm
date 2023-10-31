@@ -205,7 +205,8 @@
 ////////////////////////////////////////////////////////
 -(void)closeWindow
 {
-    // If the "window" is really a view, this is a no-op.
+    [m_oglView unregisterForNotifications];
+    [m_oglView removeFromSuperview];
 }
 
 
