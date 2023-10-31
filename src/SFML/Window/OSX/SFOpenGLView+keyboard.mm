@@ -81,6 +81,60 @@
 
 
 ////////////////////////////////////////////////////////
+- (void) selectAll:(id)sender
+{
+    sf::Event::KeyEvent key;
+    key.code = sf::Keyboard::Key::A;
+    key.system = true;
+    
+    m_requester->keyDown(key);
+    m_requester->keyUp(key);
+}
+
+
+////////////////////////////////////////////////////////
+- (void) copy:(id)sender
+{
+    sf::Event::KeyEvent key;
+    key.code = sf::Keyboard::Key::C;
+    key.system = true;
+    
+    m_requester->keyDown(key);
+    m_requester->keyUp(key);
+}
+
+
+////////////////////////////////////////////////////////
+- (void) cut:(id)sender
+{
+    sf::Event::KeyEvent key;
+    key.code = sf::Keyboard::Key::X;
+    key.system = true;
+    
+    m_requester->keyDown(key);
+    m_requester->keyUp(key);
+}
+
+
+////////////////////////////////////////////////////////
+- (void) paste:(id)sender
+{
+    sf::Event::KeyEvent key;
+    key.code = sf::Keyboard::Key::V;
+    key.system = true;
+    
+    m_requester->keyDown(key);
+    m_requester->keyUp(key);
+}
+
+
+////////////////////////////////////////////////////////
+- (BOOL)validateMenuItem:(NSMenuItem *)item {
+    return YES;
+}
+
+
+////////////////////////////////////////////////////////
 -(void)keyDown:(NSEvent*)theEvent
 {
     // Transmit to non-SFML responder
