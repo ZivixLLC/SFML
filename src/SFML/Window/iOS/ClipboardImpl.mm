@@ -57,10 +57,18 @@ String ClipboardImpl::getString()
 ////////////////////////////////////////////////////////////
 void ClipboardImpl::setString(const String& text)
 {
+<<<<<<< HEAD
     std::basic_string<Uint8> utf8 = text.toUtf8();
     NSString* data = [[NSString alloc] initWithBytes:utf8.data()
                                               length:utf8.length()
                                             encoding:NSUTF8StringEncoding];
+=======
+    const auto      utf8 = text.toUtf8();
+    NSString* const data = [[NSString alloc]
+        initWithBytes:utf8.data()
+               length:utf8.length()
+             encoding:NSUTF8StringEncoding];
+>>>>>>> 9022d956 (Define character traits for `std::uint8_t`)
 
     UIPasteboard* pboard = [UIPasteboard generalPasteboard];
     pboard.string = data;
