@@ -52,11 +52,12 @@ String ClipboardImpl::getString()
 ////////////////////////////////////////////////////////////
 void ClipboardImpl::setString(const String& text)
 {
-    AutoreleasePool pool;
-    std::basic_string<Uint8> utf8 = text.toUtf8();
-    NSString* data = [[NSString alloc] initWithBytes:utf8.data()
-                                              length:utf8.length()
-                                            encoding:NSUTF8StringEncoding];
+    const AutoreleasePool pool;
+    const auto            utf8 = text.toUtf8();
+    NSString* const       data = [[NSString alloc]
+        initWithBytes:utf8.data()
+               length:utf8.length()
+             encoding:NSUTF8StringEncoding];
 
     NSPasteboard* pboard = [NSPasteboard generalPasteboard];
     [pboard declareTypes:@[NSPasteboardTypeString] owner:nil];
