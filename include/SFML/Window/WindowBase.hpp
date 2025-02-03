@@ -244,6 +244,18 @@ public:
     void setSize(const Vector2u& size);
 
     ////////////////////////////////////////////////////////////
+    /// \brief Inform SFML that the window size has changed
+    ///
+    /// \param size New size, in pixels
+    ///
+    /// If the window was forced to another size externally
+    ///
+    /// \see getSize
+    ///
+    ////////////////////////////////////////////////////////////
+    void updateSize(const Vector2u & size);
+
+    ////////////////////////////////////////////////////////////
     /// \brief Change the title of the window
     ///
     /// \param title New title

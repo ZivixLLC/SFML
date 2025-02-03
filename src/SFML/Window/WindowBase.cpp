@@ -226,6 +226,16 @@ void WindowBase::setSize(const Vector2u& size)
 }
 
 
+void WindowBase::updateSize(const Vector2u & size)
+{
+    // Cache the new size
+    m_size.x = size.x;
+    m_size.y = size.y;
+
+    // Notify the derived class
+    onResize();
+}
+
 ////////////////////////////////////////////////////////////
 void WindowBase::setTitle(const String& title)
 {
