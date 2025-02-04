@@ -175,6 +175,10 @@ void RenderTarget::clear(const Color& color)
     {
         // Unbind texture to fix RenderTexture preventing clear
         applyTexture(NULL);
+        
+        // Apply the view (scissor testing can affect clearing)
+        if (!m_cache.enable || m_cache.viewChanged)
+            applyCurrentView();
 
         glCheck(glClearColor(color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f));
         glCheck(glClear(GL_COLOR_BUFFER_BIT));
