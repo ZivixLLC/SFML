@@ -135,6 +135,10 @@ U8StringCharTraits::int_type U8StringCharTraits::not_eof(int_type i) noexcept
     return std::char_traits<char>::not_eof(i);
 }
 
+////////////////////////////////////////////////////////////
+String::String()
+{
+}
 
 ////////////////////////////////////////////////////////////
 String::String(char ansiChar, const std::locale& locale)
