@@ -447,6 +447,7 @@ void WindowImplWin32::requestFocus()
     {
         // The window requesting focus belongs to the same process as the current window: steal focus
         SetForegroundWindow(m_handle);
+        SetFocus(m_handle);
     }
     else
     {
