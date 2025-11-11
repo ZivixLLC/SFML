@@ -149,15 +149,6 @@ WindowImplCocoa::~WindowImplCocoa()
     // after it has been deleted.
     [m_delegate setRequesterTo:0];
     [m_delegate release];
-
-    // Put the next window in front, if any.
-    NSArray* windows = [NSApp orderedWindows];
-    if ([windows count] > 0)
-    {
-        NSWindow *nextWindow = [windows objectAtIndex:0];
-        if ([nextWindow isVisible])
-            [nextWindow makeKeyAndOrderFront:nil];
-    }
 }
 
 
