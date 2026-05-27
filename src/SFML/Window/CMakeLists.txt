@@ -227,8 +227,17 @@ elseif(SFML_OS_MACOSX)
         ${SRCROOT}/OSX/WindowImplDelegateProtocol.h
         ${SRCROOT}/OSX/AutoreleasePoolWrapper.hpp
         ${SRCROOT}/OSX/AutoreleasePoolWrapper.mm
+        ${SRCROOT}/OSX/SFMLObjcPrefix.h.in
     )
     source_group("mac" FILES ${PLATFORM_SRC})
+
+    # Generate the Objective-C class-name prefix header from the template.
+    # When SFML_OBJC_CLASS_PREFIX is empty the macros are no-ops (#define Foo Foo).
+    configure_file(
+        ${SRCROOT}/OSX/SFMLObjcPrefix.h.in
+        ${CMAKE_CURRENT_BINARY_DIR}/SFMLObjcPrefix.h
+        @ONLY
+    )
 elseif(SFML_OS_IOS)
     set(PLATFORM_SRC
         ${SRCROOT}/iOS/CursorImpl.hpp
@@ -344,6 +353,8 @@ elseif(SFML_OS_FREEBSD)
     target_link_libraries(sfml-window PRIVATE usbhid)
 elseif(SFML_OS_MACOSX)
     target_link_libraries(sfml-window PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon")
+    # Make the generated SFMLObjcPrefix.h findable by sources in this module.
+    target_include_directories(sfml-window PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 elseif(SFML_OS_IOS)
     target_link_libraries(sfml-window PUBLIC "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion")
 elseif(SFML_OS_ANDROID)

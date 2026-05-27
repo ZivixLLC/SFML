@@ -27,7 +27,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/Window/Mouse.hpp>
-
+#import "SFMLObjcPrefix.h"
 #import <AppKit/AppKit.h>
 
 
