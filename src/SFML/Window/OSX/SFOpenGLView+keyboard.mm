@@ -201,6 +201,32 @@
     }
 }
 
+////////////////////////////////////////////////////////
+- (BOOL)performKeyEquivalent:(NSEvent *)theEvent 
+{
+    // Only handle if we (or a subview) are the first responder
+    NSView* firstResponder = (NSView*)[[self window] firstResponder];
+    if ([firstResponder isKindOfClass:[NSView class]]) {
+        NSView* v = firstResponder;
+        while (v != self && v != nil)
+            v = [v superview];
+        if (v == self) 
+        {
+            auto key = [SFOpenGLView convertNSKeyEventToSFMLEvent:theEvent];
+            
+            // auto response = m_GFX->onKeyDown(key);
+            // if (response == KeyboardResponse::Consumed)
+            //     return YES;
+            // else
+            //     return NO;
+
+            // don't consume the event here
+            return NO;
+        }
+    }
+    return NO;
+}
+
 
 ////////////////////////////////////////////////////////
 -(void)sfKeyUp:(NSEvent*)theEvent
