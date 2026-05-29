@@ -27,6 +27,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/Window/OSX/WindowImplCocoa.hpp>
+#include <SFML/Window/OSX/HIDInputManager.hpp> // For localizedKeys and nonLocalizedKeys
 
 #import <SFML/Window/OSX/SFKeyboardModifiersHelper.h>
 
@@ -161,6 +162,17 @@ sf::Event::KeyEvent keyEventWithModifiers(NSUInteger modifiers, sf::Keyboard::Ke
     return event;
 }
 
+////////////////////////////////////////////////////////
+sf::Event::KeyEvent convertNSKeyEventToSFMLEvent(NSEvent* event)
+{
+    // The scancode always depends on the hardware keyboard, not some OS setting.
+    sf::Keyboard::Scancode code = sf::priv::HIDInputManager::nonLocalizedKey([event keyCode]);
+
+    // Get the corresponding key under the current keyboard layout.
+    sf::Keyboard::Key key = sf::Keyboard::localize(code);
+
+    return keyEventWithModifiers([event modifierFlags], key, code);
+}
 
 ////////////////////////////////////////////////////////
 void handleModifiersChanged(NSUInteger modifiers, sf::priv::WindowImplCocoa& requester)

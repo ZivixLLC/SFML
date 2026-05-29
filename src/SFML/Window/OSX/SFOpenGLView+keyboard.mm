@@ -242,13 +242,7 @@
 ////////////////////////////////////////////////////////
 +(sf::Event::KeyEvent)convertNSKeyEventToSFMLEvent:(NSEvent*)event
 {
-    // The scancode always depends on the hardware keyboard, not some OS setting.
-    sf::Keyboard::Scancode code = sf::priv::HIDInputManager::nonLocalizedKey([event keyCode]);
-
-    // Get the corresponding key under the current keyboard layout.
-    sf::Keyboard::Key key = sf::Keyboard::localize(code);
-
-    return keyEventWithModifiers([event modifierFlags], key, code);
+    return ::convertNSKeyEventToSFMLEvent(event);
 }
 
 

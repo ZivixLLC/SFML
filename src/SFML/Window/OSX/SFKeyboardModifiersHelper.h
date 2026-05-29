@@ -51,6 +51,7 @@ namespace sf {
 ////////////////////////////////////////////////////////////
 void initialiseKeyboardHelper(void);
 
+sf::Event::KeyEvent convertNSKeyEventToSFMLEvent(NSEvent* event);
 
 ////////////////////////////////////////////////////////////
 /// \brief Set up a SFML key event based on the given modifiers flags and key code
