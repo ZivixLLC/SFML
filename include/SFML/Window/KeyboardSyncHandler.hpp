@@ -1,0 +1,23 @@
+#pragma once
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+#include <SFML/Window/Event.hpp>
+
+namespace sf
+{
+
+////////////////////////////////////////////////////////////
+/// \brief Keyboard Sync Handler
+///
+////////////////////////////////////////////////////////////
+class KeyboardSyncHandler
+{
+public:
+    virtual bool onKeyDown(const Event::KeyEvent& key)       = 0;
+    virtual bool onKeyUp(const Event::KeyEvent& key)         = 0;
+    virtual bool onTextEntered(Uint32 charcode)              = 0;
+};
+
+}

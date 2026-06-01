@@ -117,6 +117,18 @@ public:
     ////////////////////////////////////////////////////////////
     bool popEvent(Event& event, bool block);
 
+    bool isKeyboardSyncEnabled() const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief	Sets the keyboard sync handler. Also enables or disables keyboard sync.
+    ///
+    /// \param handler	Handler to set. If valid, enables keyboard sync. If nullptr, disables keyboard sync.
+    ///
+    ////////////////////////////////////////////////////////////
+    void setKeyboardSyncHandler(KeyboardSyncHandler* handler);
+
+    KeyboardSyncHandler* getKeyboardSyncHandler() const;
+
     ////////////////////////////////////////////////////////////
     /// \brief Get the OS-specific handle of the window
     ///
@@ -287,11 +299,12 @@ private:
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    std::queue<Event> m_events;                                              //!< Queue of available events
-    JoystickState     m_joystickStates[Joystick::Count];                     //!< Previous state of the joysticks
-    Vector3f          m_sensorValue[Sensor::Count];                          //!< Previous value of the sensors
-    float             m_joystickThreshold;                                   //!< Joystick threshold (minimum motion for "move" event to be generated)
-    float             m_previousAxes[Joystick::Count][Joystick::AxisCount];  //!< Position of each axis last time a move event triggered, in range [-100, 100]
+    std::queue<Event>     m_events;                                              //!< Queue of available events
+    JoystickState         m_joystickStates[Joystick::Count];                     //!< Previous state of the joysticks
+    Vector3f              m_sensorValue[Sensor::Count];                          //!< Previous value of the sensors
+    float                 m_joystickThreshold;                                   //!< Joystick threshold (minimum motion for "move" event to be generated)
+    float                 m_previousAxes[Joystick::Count][Joystick::AxisCount];  //!< Position of each axis last time a move event triggered, in range [-100, 100]
+    KeyboardSyncHandler*  m_keyboardSyncHandler;                                 ///< Keyboard sync handler for async key events
 };
 
 } // namespace priv

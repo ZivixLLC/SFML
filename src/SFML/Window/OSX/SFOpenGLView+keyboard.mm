@@ -136,12 +136,15 @@
 
 ////////////////////////////////////////////////////////
 -(void)keyDown:(NSEvent*)theEvent
-{
-    // Transmit to non-SFML responder
-    [[self nextResponder] keyDown:theEvent];
-
+{   
     if (m_requester == 0)
+    {       
+        // Transmit to non-SFML responder
+        [[self nextResponder] keyDown:theEvent]; 
         return;
+    }
+
+    bool consumed = false;
 
     // Handle key down event
     if (m_useKeyRepeat || ![theEvent isARepeat])
@@ -149,7 +152,7 @@
         sf::Event::KeyEvent key = [SFOpenGLView convertNSKeyEventToSFMLEvent:theEvent];
 
         if ((key.code != sf::Keyboard::Unknown) || (key.scancode != sf::Keyboard::Scan::Unknown))
-            m_requester->keyDown(key);
+            consumed |= m_requester->keyDown(key);
     }
 
 
@@ -176,14 +179,14 @@
         if (keycode == 0x33)
         {
             // Send the correct Unicode value (i.e. 8) instead of 127 (which is 'delete')
-            m_requester->textEntered(8);
+            consumed |= m_requester->textEntered(8);
         }
 
         // Delete
         else if ((keycode == 0x75) || (keycode == NSDeleteFunctionKey))
         {
             // Instead of the value 63272 we send 127.
-            m_requester->textEntered(127);
+            consumed |= m_requester->textEntered(127);
         }
 
         // Otherwise, let's see what our hidden field has computed
@@ -193,11 +196,17 @@
 
             // Send each character to SFML event requester
             for (NSUInteger index = 0; index < [string length]; ++index)
-                m_requester->textEntered([string characterAtIndex:index]);
+                consumed |= m_requester->textEntered([string characterAtIndex:index]);
 
             // Empty our hidden cache
             [m_hiddenTextView setString:@""];
         }
+    }
+
+    if (!consumed)
+    {
+        // Transmit to non-SFML responder
+        [[self nextResponder] keyDown:theEvent];
     }
 }
 

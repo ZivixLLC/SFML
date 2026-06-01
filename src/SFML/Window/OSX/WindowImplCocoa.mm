@@ -29,6 +29,7 @@
 #include <SFML/Window/OSX/AutoreleasePoolWrapper.hpp>
 #include <SFML/Window/OSX/WindowImplCocoa.hpp>
 #include <SFML/System/Err.hpp>
+#include <SFML/Window/KeyboardSyncHandler.hpp>
 
 #import <SFML/Window/OSX/cpp_objc_conversion.h>
 #import <SFML/Window/OSX/Scaling.h>
@@ -348,35 +349,71 @@ void WindowImplCocoa::mouseMovedOut(void)
 
 
 ////////////////////////////////////////////////////////////
-void WindowImplCocoa::keyDown(Event::KeyEvent key)
+bool WindowImplCocoa::keyDown(Event::KeyEvent key)
 {
-    Event event;
-    event.type = Event::KeyPressed;
-    event.key = key;
+    if (isKeyboardSyncEnabled())
+    {
+        bool consumed = getKeyboardSyncHandler()->onKeyDown(key);
+        return consumed;
+    }
+    else
+    {
+        Event event;
+        event.type = Event::KeyPressed;
+        event.key = key;
 
-    pushEvent(event);
+        pushEvent(event);
+
+        // default SFML behavior is not to consume
+        // when using async mode.
+        return false;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////
-void WindowImplCocoa::keyUp(Event::KeyEvent key)
+bool WindowImplCocoa::keyUp(Event::KeyEvent key)
 {
-    Event event;
-    event.type = Event::KeyReleased;
-    event.key = key;
+    if (isKeyboardSyncEnabled())
+    {
+        bool consumed = getKeyboardSyncHandler()->onKeyUp(key);
+        return consumed;
+    }
+    else
+    {
+        Event event;
+        event.type = Event::KeyReleased;
+        event.key = key;
 
-    pushEvent(event);
+        pushEvent(event);
+
+        // default SFML behavior is not to consume
+        // when using async mode.
+        return false;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////
-void WindowImplCocoa::textEntered(unichar charcode)
+bool WindowImplCocoa::textEntered(unichar charcode)
 {
-    Event event;
-    event.type = Event::TextEntered;
-    event.text.unicode = charcode;
+    if (isKeyboardSyncEnabled())
+    {
+        bool consumed = getKeyboardSyncHandler()->onTextEntered(charcode);
+        return consumed;
+    }
+    else
+    {
+        Event event;
+        event.type = Event::TextEntered;
+        event.text.unicode = charcode;
 
-    pushEvent(event);
+        pushEvent(event);
+
+        // default SFML behavior is not to consume
+        // when using async mode.
+        return false;
+    }
 }
 
 

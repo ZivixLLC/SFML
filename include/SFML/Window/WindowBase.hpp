@@ -48,6 +48,7 @@ namespace priv
 }
 
 class Event;
+class KeyboardSyncHandler;
 
 ////////////////////////////////////////////////////////////
 /// \brief Window that serves as a base for other windows
@@ -407,6 +408,17 @@ public:
     WindowHandle getSystemHandle() const;
     
     void setProcessEvents(bool process);
+
+    bool isKeyboardSyncEnabled() const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief	Sets the keyboard sync handler. Also enables or disables keyboard sync.
+    ///
+    /// \param handler	Handler to set. If valid, enables keyboard sync. 
+    ///                 If nullptr, disables keyboard sync.
+    ///
+    ////////////////////////////////////////////////////////////
+    void setKeyboardSyncHandler(KeyboardSyncHandler* handler);
 
     ////////////////////////////////////////////////////////////
     /// \brief Create a Vulkan rendering surface

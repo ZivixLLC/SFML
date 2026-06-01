@@ -65,6 +65,9 @@ typedef void* NSOpenGLContextRef;
 
 namespace sf
 {
+
+class KeyboardSyncHandler;
+
 namespace priv
 {
 ////////////////////////////////////////////////////////////
@@ -205,8 +208,10 @@ public:
     ///
     /// \param key active key
     ///
+    /// \returns true if the event was consumed, false otherwise
+    ///
     ////////////////////////////////////////////////////////////
-    void keyDown(Event::KeyEvent key);
+    bool keyDown(Event::KeyEvent key);
 
     ////////////////////////////////////////////////////////////
     /// \brief Key Up Event - called by the cocoa view object
@@ -215,8 +220,10 @@ public:
     ///
     /// \param key active key
     ///
+    /// \returns true if the event was consumed, false otherwise
+    ///
     ////////////////////////////////////////////////////////////
-    void keyUp(Event::KeyEvent key);
+    bool keyUp(Event::KeyEvent key);
 
     ////////////////////////////////////////////////////////////
     /// \brief Text Entred Event - called by the cocoa view object
@@ -225,8 +232,10 @@ public:
     ///
     /// \param charcode Unicode input
     ///
+    /// \returns true if the event was consumed, false otherwise
+    ///
     ////////////////////////////////////////////////////////////
-    void textEntered(unichar charcode);
+    bool textEntered(unichar charcode);
 
     ////////////////////////////////////////////////////////////
     /// \brief Apply the context to the view

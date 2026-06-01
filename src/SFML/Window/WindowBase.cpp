@@ -390,8 +390,19 @@ void WindowBase::setFullscreenWindow(const WindowBase* window)
     WindowsBaseImpl::fullscreenWindow = window;
 }
 
-    void WindowBase::setProcessEvents(bool process) {
-        m_impl->setProcessEvents(process);
-    }
+void WindowBase::setProcessEvents(bool process) 
+{
+    m_impl->setProcessEvents(process);
+}
+
+bool WindowBase::isKeyboardSyncEnabled() const
+{
+    return m_impl->isKeyboardSyncEnabled();
+}
+
+void WindowBase::setKeyboardSyncHandler(KeyboardSyncHandler* handler)
+{
+    m_impl->setKeyboardSyncHandler(handler);
+}
 
 } // namespace sf

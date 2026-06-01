@@ -105,8 +105,9 @@ WindowImpl* WindowImpl::create(WindowHandle handle)
 
 ////////////////////////////////////////////////////////////
 WindowImpl::WindowImpl() :
+m_bProcessEvents(true), // mod by jon keller, 2019
 m_joystickThreshold(0.1f),
-m_bProcessEvents(true) // mod by jon keller, 2019
+m_keyboardSyncHandler{nullptr}
 {
     // Get the initial joystick states
     JoystickManager::getInstance().update();
@@ -176,6 +177,23 @@ bool WindowImpl::popEvent(Event& event, bool block)
     return false;
 }
 
+////////////////////////////////////////////////////////////
+bool WindowImpl::isKeyboardSyncEnabled() const
+{
+    return m_keyboardSyncHandler != nullptr;
+}
+
+////////////////////////////////////////////////////////////
+void WindowImpl::setKeyboardSyncHandler(KeyboardSyncHandler* handler)
+{
+    m_keyboardSyncHandler = handler;
+}
+
+////////////////////////////////////////////////////////////
+KeyboardSyncHandler* WindowImpl::getKeyboardSyncHandler() const
+{
+    return m_keyboardSyncHandler;
+}
 
 ////////////////////////////////////////////////////////////
 void WindowImpl::pushEvent(const Event& event)
