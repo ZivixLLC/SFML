@@ -301,7 +301,7 @@ WindowHandle WindowImplWin32::getSystemHandle() const
 void WindowImplWin32::processEvents()
 {
     // We process the window events only if we own it
-    if (!m_callback)
+    // if (!m_callback) - jon mod - we now choose externally whether to process events
     {
         MSG message;
         while (PeekMessageW(&message, NULL, 0, 0, PM_REMOVE))
